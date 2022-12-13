@@ -28,8 +28,7 @@ import net.sourceforge.pinyin4j.multipinyin.Trie;
  */
 public class PinyinHelper {
 
-    private static final String[] ARR_EMPTY = {};
-    private static final String EMPTY = "";
+    private static final String[] ARR_EMPTY = null;
 
     /**
      * Get all unformmatted Hanyu Pinyin presentations of a single Chinese
@@ -268,7 +267,7 @@ public class PinyinHelper {
             int success = i;
             int current = i;
             do {
-                String hexStr = Integer.toHexString((int) ch).toUpperCase();
+                String hexStr = Integer.toHexString(ch).toUpperCase();
                 currentTrie = currentTrie.get(hexStr);
                 if (currentTrie != null) {
                     if (currentTrie.getPinyin() != null) {

@@ -1,9 +1,15 @@
 package com.hp.hpl.sparta;
 
-import java.io.*;
-import java.util.*;
+import com.hp.hpl.sparta.xpath.Step;
+import com.hp.hpl.sparta.xpath.XPath;
+import com.hp.hpl.sparta.xpath.XPathException;
 
-import com.hp.hpl.sparta.xpath.*;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.NoSuchElementException;
+import java.util.Vector;
 
 /** An XML Document.
 
@@ -21,7 +27,6 @@ import com.hp.hpl.sparta.xpath.*;
  @author Eamonn O'Brien-Strain
 
 
- @see org.w3c.dom.Document
  */
 public class Document extends Node {
 
@@ -113,8 +118,6 @@ public class Document extends Node {
     }
   }
 
-  static private final Integer ONE = new Integer(1);
-
   void monitor(XPath parseTree) throws XPathException {
     if (DEBUG) {
       String indexingAttr = parseTree.getIndexingAttrNameOfEquals();
@@ -123,11 +126,11 @@ public class Document extends Node {
         String prefix = xpath.substring(0, xpath.lastIndexOf('='));
         Integer count = (Integer) indexible_.get(prefix);
         if (count == null)
-          count = ONE;
+          count = 1;
         else
-          count = new Integer(count.intValue() + 1);
+          count = count + 1;
         indexible_.put(prefix, count);
-        if (count.intValue() > 100)
+        if (count > 100)
           System.out.println("COULD-BE-INDEXED: " + xpath + " used " + count + " times in " + this);
       }
     }
@@ -226,7 +229,7 @@ public class Document extends Node {
     }
 
     /**
-     * @param a value of the indexing attribute
+     * @param attrValue value of the indexing attribute
      * @return enumeration of Elements
      * @throws ParseException when XPath that created this Index is malformed.
      */
@@ -365,8 +368,7 @@ public class Document extends Node {
 
     //Do cheap tests first
     if (this == thatO) return true;
-    if (!(thatO instanceof Document)) return false;
-    Document that = (Document) thatO;
+    if (!(thatO instanceof Document that)) return false;
     return this.rootElement_.equals(that.rootElement_);
   }
 
