@@ -122,7 +122,8 @@ class XPathVisitor implements Visitor {
         nodelistRaw_.removeAllElements();
         for (Enumeration i = oldNodeList.elements(); i.hasMoreElements(); ) {
             Object node = i.nextElement();
-            if (node instanceof Element element) {
+            if (node instanceof Element) {
+                Element element = (Element) node;
                 for (Node n = element.getFirstChild(); n != null; n = n.getNextSibling())
                     if (n instanceof Text) nodelistRaw_.add(((Text) n).getData());
             }
@@ -153,7 +154,8 @@ class XPathVisitor implements Visitor {
     private void accumulateMatchingElements(Element element, String tagName) {
         int position = 0;
         for (Node n = element.getFirstChild(); n != null; n = n.getNextSibling()) {
-            if (n instanceof Element child) {
+            if (n instanceof Element) {
+                Element child = (Element) n;
                 if (Objects.equals(child.getTagName(), tagName)) //both strings interned
                     nodelistRaw_.add(child, ++position);
                 if (multiLevel_) accumulateMatchingElements(child, tagName); //recursion
@@ -166,7 +168,8 @@ class XPathVisitor implements Visitor {
         nodelistRaw_.removeAllElements();
         for (Enumeration i = oldNodeList.elements(); i.hasMoreElements(); ) {
             Node node = (Node) i.nextElement();
-            if (node instanceof Element element) {
+            if (node instanceof Element) {
+                Element element = (Element) node;
                 String attr = element.getAttribute(test.getAttrName());
                 if (attr != null) nodelistRaw_.add(attr);
             }
@@ -178,24 +181,27 @@ class XPathVisitor implements Visitor {
     }
 
     public void visit(AttrExistsExpr a) throws XPathException {
-        if (!(node_ instanceof Element element))
+        if (!(node_ instanceof Element))
             throw new XPathException(xpath_, "Cannot test attribute of document");
+        Element element = (Element) node_;
         String attrValue = element.getAttribute(a.getAttrName());
         boolean result = attrValue != null && attrValue.length() > 0;
         exprStack_.push(result);
     }
 
     public void visit(AttrEqualsExpr a) throws XPathException {
-        if (!(node_ instanceof Element element))
+        if (!(node_ instanceof Element))
             throw new XPathException(xpath_, "Cannot test attribute of document");
+        Element element = (Element) node_;
         String attrValue = element.getAttribute(a.getAttrName());
         boolean result = a.getAttrValue().equals(attrValue);
         exprStack_.push(result);
     }
 
     public void visit(AttrNotEqualsExpr a) throws XPathException {
-        if (!(node_ instanceof Element element))
+        if (!(node_ instanceof Element))
             throw new XPathException(xpath_, "Cannot test attribute of document");
+        Element element = (Element) node_;
         String attrValue = element.getAttribute(a.getAttrName());
         boolean result = !a.getAttrValue().equals(attrValue);
         exprStack_.push(result);
@@ -213,18 +219,20 @@ class XPathVisitor implements Visitor {
     }
 
     public void visit(AttrGreaterExpr a) throws XPathException {
-        if (!(node_ instanceof Element element))
+        if (!(node_ instanceof Element))
             throw new XPathException(xpath_, "Cannot test attribute of document");
         // Use jdk1.1 API to make the code work with PersonalJava.
         // double attrValue = Double.parseDouble( element.getAttribute( a.getAttrName() ) );
+        Element element = (Element) node_;
         long attrValue = Long.parseLong(element.getAttribute(a.getAttrName()));
         boolean result = attrValue > a.getAttrValue();
         exprStack_.push(result);
     }
 
     public void visit(TextExistsExpr a) throws XPathException {
-        if (!(node_ instanceof Element element))
+        if (!(node_ instanceof Element))
             throw new XPathException(xpath_, "Cannot test attribute of document");
+        Element element = (Element) node_;
         for (Node i = element.getFirstChild(); i != null; i = i.getNextSibling()) {
             if (i instanceof Text) {
                 exprStack_.push(true);
@@ -235,10 +243,12 @@ class XPathVisitor implements Visitor {
     }
 
     public void visit(TextEqualsExpr a) throws XPathException {
-        if (!(node_ instanceof Element element))
+        if (!(node_ instanceof Element))
             throw new XPathException(xpath_, "Cannot test attribute of document");
+        Element element = (Element) node_;
         for (Node i = element.getFirstChild(); i != null; i = i.getNextSibling()) {
-            if (i instanceof Text text) {
+            if (i instanceof Text) {
+                Text text = (Text) i;
                 if (text.getData().equals(a.getValue())) {
                     exprStack_.push(true);
                     return;
@@ -249,10 +259,12 @@ class XPathVisitor implements Visitor {
     }
 
     public void visit(TextNotEqualsExpr a) throws XPathException {
-        if (!(node_ instanceof Element element))
+        if (!(node_ instanceof Element))
             throw new XPathException(xpath_, "Cannot test attribute of document");
+        Element element = (Element) node_;
         for (Node i = element.getFirstChild(); i != null; i = i.getNextSibling()) {
-            if (i instanceof Text text) {
+            if (i instanceof Text) {
+                Text text = (Text) i;
                 if (!text.getData().equals(a.getValue())) {
                     exprStack_.push(true);
                     return;
@@ -263,8 +275,9 @@ class XPathVisitor implements Visitor {
     }
 
     public void visit(PositionEqualsExpr a) throws XPathException {
-        if (!(node_ instanceof Element element))
+        if (!(node_ instanceof Element))
             throw new XPathException(xpath_, "Cannot test position of document");
+        Element element = (Element) node_;
         boolean result = (nodelistRaw_.position(element) == a.getPosition());
         exprStack_.push(result);
     }

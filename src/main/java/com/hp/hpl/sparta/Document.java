@@ -368,7 +368,8 @@ public class Document extends Node {
 
     //Do cheap tests first
     if (this == thatO) return true;
-    if (!(thatO instanceof Document that)) return false;
+    if (!(thatO instanceof Document)) return false;
+    Document that = (Document) thatO;
     return this.rootElement_.equals(that.rootElement_);
   }
 
