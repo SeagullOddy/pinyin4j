@@ -7,7 +7,6 @@
 ## Download
 
 1. 下载 jar 文件，放到项目的 lib 文件中；
-
 2. 通过 maven 或 gradle 添加依赖（具体方法可以百度“maven/gradle 添加本地依赖”）。
 
 ## 原项目 QQ 群
@@ -20,15 +19,15 @@ QQ 群：479540440
 
 ## 外挂多音词库
 
-用户配置的外挂词库会覆盖系统中相同词的读音,可用于纠错
+用户配置的外挂词库会覆盖系统中相同词的读音，可用于纠错
 
-配置方式很简单,只需要配置路径即可
+配置方式很简单，只需要配置路径即可
 
 ```java
 MultiPinyinConfig.multiPinyinPath = "/Users/yiboliu/my_multi_pinyin.txt";
 ```
 
-格式同系统的多音词库,如:
+格式同系统的多音词库，如:
 
 ```txt
 吸血鬼日记 (xi1,xue4,gui3,ri4,ji4)
