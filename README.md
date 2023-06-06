@@ -6,8 +6,7 @@
 
 ## Download
 
-1. 下载 jar 文件，放到项目的 lib 文件中；
-2. 通过 maven 或 gradle 添加依赖（具体方法可以百度“maven/gradle 添加本地依赖”）。
+下载 `out/artifacts/pinyin4j_jar/` 目录下的 jar 文件，放到项目的 lib 文件中。
 
 ## 原项目 QQ 群
 
