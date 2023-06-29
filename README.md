@@ -1,8 +1,10 @@
 # pinyin4j
 
-<http://sourceforge.net/projects/pinyin4j> 的复制版本。
+Forked from [belerweb/pinyin4j](https://github.com/belerweb/pinyin4j)
 
-主要改动是迁移到了 java11，添加 module-info.java，大概算是解决了高版本项目不能用的问题吧。
+<http://sourceforge.net/projects/pinyin4j> 的修改版本。
+
+迁移到 java 11，添加 module-info.java 支持。
 
 ## Download
 
