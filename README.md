@@ -2,8 +2,6 @@
 
 Forked from [belerweb/pinyin4j](https://github.com/belerweb/pinyin4j)
 
-<http://sourceforge.net/projects/pinyin4j> 的修改版本。
-
 迁移到 java 11，添加 module-info.java 支持。
 
 ## Download
