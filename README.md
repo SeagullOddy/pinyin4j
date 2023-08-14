@@ -2,7 +2,7 @@
 
 Forked from [belerweb/pinyin4j](https://github.com/belerweb/pinyin4j)
 
-迁移到 java 11，添加 module-info.java 支持。
+迁移到 java 11，添加 module-info.java 支持，能在 JavaFx 中使用。
 
 ## Download
 
